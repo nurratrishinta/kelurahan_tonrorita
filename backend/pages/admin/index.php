@@ -39,7 +39,7 @@ $result = mysqli_query($connect, $qAdmin) or die("Query error: " . mysqli_error(
                                     <th>Foto</th>
                                     <th>Username</th>
                                     <th>Password</th>
-                                    <th>Nama Lengkap</th>
+                                    
                                     <th>Email</th>
                                     <th>Dibuat</th>
                                     <th style="width: 160px;">Aksi</th>
@@ -59,7 +59,7 @@ $result = mysqli_query($connect, $qAdmin) or die("Query error: " . mysqli_error(
                                         </td>
                                         <td><?= htmlspecialchars($item->username) ?></td>
                                         <td class="text-center">******</td>
-                                        <td><?= htmlspecialchars($item->nama_lengkap) ?></td>
+                                       
                                         <td><?= htmlspecialchars($item->email) ?></td>
                                         <td><?= htmlspecialchars($item->created_at) ?></td>
                                         <td>

@@ -55,17 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="text" name="jabatan" class="form-control" value="<?= htmlspecialchars($data->jabatan) ?>" required>
                 </div>
 
-                <div class="mb-3">
-                    <label>Atasan (Parent)</label>
-                    <select name="parent_id" class="form-control">
-                        <option value="">-- Tidak Ada Atasan --</option>
-                        <?php while ($p = $parents->fetch_object()): ?>
-                            <option value="<?= $p->id ?>" <?= $p->id == $data->parent_id ? 'selected' : '' ?>>
-                                <?= htmlspecialchars($p->nama) ?>
-                            </option>
-                        <?php endwhile; ?>
-                    </select>
-                </div>
+               
 
                 <div class="mb-3">
                     <label>Foto Sekarang</label><br>

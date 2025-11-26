@@ -121,6 +121,15 @@ $role = strtolower($_SESSION['role'] ?? 'user');
                         <span class="nav-link-text ms-1">Perangkat Kelurahan</span>
                     </a>
                 </li>
+                <!-- Menu Kontak -->
+                <li class="nav-item">
+                    <a class="nav-link <?= (strpos($currentURI, '/kontak/') !== false) ? 'active bg-gradient-primary' : '' ?>"
+                        href="../kontak/index.php">
+                        <i class="material-icons opacity-10">call</i>
+                        <span class="nav-link-text ms-1">Kontak</span>
+                    </a>
+                </li>
+
 
                 <li class="nav-item">
                     <a class="nav-link <?= (strpos($currentURI, '/download/') !== false) ? 'active bg-gradient-primary' : '' ?>" href="../download/index.php">
@@ -183,19 +192,19 @@ $role = strtolower($_SESSION['role'] ?? 'user');
             <?php else : ?>
                 <!-- ✅ MENU UNTUK PENGUNJUNG -->
                 <li class="nav-item">
-                    <a class="nav-link <?= (strpos($currentURI, '/profil_kelurahan/') !== false) ? 'active bg-gradient-primary' : '' ?>" href="../profil_kelurahan/index.php">
+                    <a class="nav-link <?= (strpos($currentURI, '/profil_kelurahan2/') !== false) ? 'active bg-gradient-primary' : '' ?>" href="../profil_kelurahan2/index.php">
                         <i class="material-icons opacity-10">domain</i>
                         <span class="nav-link-text ms-1">Profil Kelurahan</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= (strpos($currentURI, '/berita/') !== false) ? 'active bg-gradient-primary' : '' ?>" href="../berita/index.php">
+                    <a class="nav-link <?= (strpos($currentURI, '/berita2/') !== false) ? 'active bg-gradient-primary' : '' ?>" href="../berita2/index.php">
                         <i class="material-icons opacity-10">article</i>
                         <span class="nav-link-text ms-1">Berita</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= (strpos($currentURI, '/galeri/') !== false) ? 'active bg-gradient-primary' : '' ?>" href="../galeri/index.php">
+                    <a class="nav-link <?= (strpos($currentURI, '/galeri2/') !== false) ? 'active bg-gradient-primary' : '' ?>" href="../galeri2/index.php">
                         <i class="material-icons opacity-10">photo_library</i>
                         <span class="nav-link-text ms-1">Galeri</span>
                     </a>

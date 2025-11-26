@@ -21,83 +21,86 @@ $result = mysqli_query($connect, $qProfil) or die("Query error: " . mysqli_error
                     <i class="bi bi-building"></i> Data Profil Kelurahan
                 </h4>
                 <div>
-                    <!-- <a href="./create.php" class="btn btn-primary btn-sm">
-                        <i class="bi bi-plus-circle"></i> Tambah Profil
-                    </a> -->
                     <a href="./download_profil.php" target="_blank" class="btn btn-success btn-sm">
-                        <i class="bi bi-download"></i> Download
+                        <i class="bi bi-download"></i> 
                     </a>
                 </div>
             </div>
         </div>
 
-        <!-- Tabel Data -->
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <?php if (mysqli_num_rows($result) === 0): ?>
-                    <div class="text-center p-5 text-muted">
-                        <i class="bi bi-building fs-1"></i>
-                        <p class="mt-3 mb-0">Belum ada profil kelurahan yang ditambahkan.</p>
-                        <a href="./create.php" class="btn btn-outline-primary mt-3">
-                            <i class="bi bi-plus-circle"></i> Tambah Sekarang
-                        </a>
-                    </div>
-                <?php else: ?>
-                    <div class="table-responsive">
-                        <table id="datatable" class="table table-bordered table-hover align-middle text-center">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama Kelurahan</th>
-                                    <th>Visi</th>
-                                    <th>Misi</th>
-                                    <th>Sejarah</th>
-                                    <th>Alamat</th>
-                                    <th>Telepon</th>
-                                    <th>Email</th>
-                                    <th>Logo</th>
-                                    <th>Dibuat</th>
-                                   
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                while ($item = $result->fetch_object()):
-                                ?>
-                                    <tr>
-                                        <td><?= $no++ ?></td>
-                                        <td><?= htmlspecialchars($item->nama_kelurahan) ?></td>
-                                        <td style="max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                            <?= htmlspecialchars(substr($item->visi, 0, 50)) ?>...
-                                        </td>
-                                        <td style="max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                            <?= htmlspecialchars(substr($item->misi, 0, 50)) ?>...
-                                        </td>
-                                        <td style="max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                            <?= htmlspecialchars(substr($item->sejarah, 0, 50)) ?>...
-                                        </td>
-                                        <td><?= htmlspecialchars($item->alamat) ?></td>
-                                        <td><?= htmlspecialchars($item->telepon) ?></td>
-                                        <td><?= htmlspecialchars($item->email) ?></td>
-                                        <td>
-                                            <?php if (!empty($item->logo)): ?>
-                                                <img src="../../../storages/logo/<?= htmlspecialchars($item->logo) ?>" width="60" height="60"
-                                                    style="object-fit: cover; border-radius: 50%;">
-                                            <?php else: ?>
-                                                <span class="text-muted">Tidak ada logo</span>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td><?= htmlspecialchars($item->created_at) ?></td>
-                                        
-                                    </tr>
-                                <?php endwhile; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php endif; ?>
+        <!-- Jika data kosong -->
+        <?php if (mysqli_num_rows($result) === 0): ?>
+            <div class="card shadow-sm p-5 text-center">
+                <i class="bi bi-building fs-1 text-muted"></i>
+                <p class="mt-3 mb-0 text-muted">Belum ada profil kelurahan yang ditambahkan.</p>
+                <a href="./create.php" class="btn btn-outline-primary mt-3">
+                    <i class="bi bi-plus-circle"></i> Tambah Sekarang
+                </a>
             </div>
-        </div>
+
+        <?php else: ?>
+
+            <!-- Tampilan Dalam Bentuk Card Grid -->
+            <div class="row">
+                <?php
+                $no = 1;
+                while ($item = $result->fetch_object()):
+                ?>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+
+                                <!-- Bagian Logo + Nama Kelurahan -->
+                                <div class="d-flex align-items-center mb-3">
+                                    <?php if (!empty($item->logo)): ?>
+                                        <img src="../../../storages/logo/<?= htmlspecialchars($item->logo) ?>"
+                                            width="60" height="60" class="rounded-circle me-3"
+                                            style="object-fit: cover;">
+                                    <?php else: ?>
+                                        <div class="bg-light rounded-circle d-flex justify-content-center align-items-center me-3"
+                                            style="width:60px; height:60px;">
+                                            <i class="bi bi-image text-secondary fs-4"></i>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <div>
+                                        <h6 class="mb-0 fw-bold"><?= htmlspecialchars($item->nama_kelurahan) ?></h6>
+                                        <small class="text-muted">Dibuat: <?= htmlspecialchars($item->created_at) ?></small>
+                                    </div>
+                                </div>
+
+                                <!-- Data Turun Ke Bawah -->
+                                <p class="mb-2"><strong>Visi:</strong><br>
+                                    <span class="text-muted"><?= htmlspecialchars(substr($item->visi, 0, 120)) ?>...</span>
+                                </p>
+
+                                <p class="mb-2"><strong>Misi:</strong><br>
+                                    <span class="text-muted"><?= htmlspecialchars(substr($item->misi, 0, 120)) ?>...</span>
+                                </p>
+
+                                <p class="mb-2"><strong>Sejarah:</strong><br>
+                                    <span class="text-muted"><?= htmlspecialchars(substr($item->sejarah, 0, 120)) ?>...</span>
+                                </p>
+
+                                <p class="mb-2"><strong>Alamat:</strong><br>
+                                    <span class="text-muted"><?= htmlspecialchars($item->alamat) ?></span>
+                                </p>
+
+                                <p class="mb-2"><strong>Telepon:</strong>
+                                    <span class="text-muted"><?= htmlspecialchars($item->telepon) ?></span>
+                                </p>
+
+                                <p class="mb-2"><strong>Email:</strong>
+                                    <span class="text-muted"><?= htmlspecialchars($item->email) ?></span>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+
+        <?php endif; ?>
 
     </div>
 </div>

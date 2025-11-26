@@ -10,6 +10,17 @@ $qBerita = "SELECT * FROM berita ORDER BY created_at DESC";
 $result = mysqli_query($connect, $qBerita) or die("Query error: " . mysqli_error($connect));
 ?>
 
+<!-- CSS untuk merapikan JUDUL agar tidak melebar -->
+<style>
+    .kolom-judul {
+        white-space: normal !important;
+        word-wrap: break-word;
+        word-break: break-word;
+        max-width: 350px;
+        text-align: left !important;
+    }
+</style>
+
 <!-- Content Wrapper -->
 <div class="body-wrapper">
     <div class="container-fluid">
@@ -52,7 +63,6 @@ $result = mysqli_query($connect, $qBerita) or die("Query error: " . mysqli_error
                                     <th>Kategori</th>
                                     <th>Tanggal</th>
                                     <th>Dibuat</th>
-                                   
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,7 +72,19 @@ $result = mysqli_query($connect, $qBerita) or die("Query error: " . mysqli_error
                                 ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= htmlspecialchars($item->judul) ?></td>
+
+                                        <!-- Judul rapi, auto wrap + potong 10 kata -->
+                                        <td class="kolom-judul">
+                                            <?php
+                                            $kata = explode(' ', $item->judul);
+                                            $judulPendek = (count($kata) > 10)
+                                                ? implode(' ', array_slice($kata, 0, 10)) . '...'
+                                                : $item->judul;
+
+                                            echo htmlspecialchars($judulPendek);
+                                            ?>
+                                        </td>
+
                                         <td>
                                             <?php if (!empty($item->gambar)): ?>
                                                 <img src="../../../storages/berita/<?= htmlspecialchars($item->gambar) ?>" width="70" class="rounded shadow-sm">
@@ -70,11 +92,12 @@ $result = mysqli_query($connect, $qBerita) or die("Query error: " . mysqli_error
                                                 <span class="text-muted">Tidak ada</span>
                                             <?php endif; ?>
                                         </td>
+
                                         <td><?= htmlspecialchars($item->penulis) ?></td>
                                         <td><?= htmlspecialchars($item->kategori) ?></td>
                                         <td><?= htmlspecialchars($item->tanggal) ?></td>
                                         <td><?= htmlspecialchars($item->created_at) ?></td>
-                                        
+
                                     </tr>
                                 <?php endwhile; ?>
                             </tbody>

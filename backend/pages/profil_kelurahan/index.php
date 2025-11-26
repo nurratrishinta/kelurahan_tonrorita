@@ -47,15 +47,10 @@ $result = mysqli_query($connect, $qProfil) or die("Query error: " . mysqli_error
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Kelurahan</th>
-                                        <th>Visi</th>
-                                        <th>Misi</th>
                                         <th>Sejarah</th>
                                         <th>Alamat</th>
-                                        <th>Telepon</th>
-                                        <th>Email</th>
+
                                         <th>Logo</th>
-                                        <th>Dibuat</th>
-                                        <th>Diperbarui</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -67,29 +62,19 @@ $result = mysqli_query($connect, $qProfil) or die("Query error: " . mysqli_error
                                     ?>
                                         <tr>
                                             <td><?= $no ?></td>
+
                                             <td><?= htmlspecialchars($item->nama_kelurahan) ?></td>
-                                            <td style="max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                                <?= htmlspecialchars(substr($item->visi, 0, 50)) ?>...
-                                            </td>
-                                            <td style="max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                                <?= htmlspecialchars(substr($item->misi, 0, 50)) ?>...
-                                            </td>
-                                            <td style="max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                                <?= htmlspecialchars(substr($item->sejarah, 0, 50)) ?>...
-                                            </td>
-                                            <td style="max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                                <?php
-                                                $alamat_kata = explode(' ', $item->alamat);
-                                                if (count($alamat_kata) > 20) {
-                                                    echo htmlspecialchars(implode(' ', array_slice($alamat_kata, 0, 20))) . '...';
-                                                } else {
-                                                    echo htmlspecialchars($item->alamat);
-                                                }
-                                                ?>
+
+                                            <!-- SEJARAH (TURUN KE BAWAH) -->
+                                            <td style="max-width: 300px; white-space: normal; word-wrap: break-word;">
+                                                <?= htmlspecialchars($item->sejarah) ?>
                                             </td>
 
-                                            <td><?= htmlspecialchars($item->telepon) ?></td>
-                                            <td><?= htmlspecialchars($item->email) ?></td>
+                                            <!-- ALAMAT (TURUN KE BAWAH) -->
+                                            <td style="max-width: 300px; white-space: normal; word-wrap: break-word;">
+                                                <?= htmlspecialchars($item->alamat) ?>
+                                            </td>
+
                                             <td>
                                                 <?php if (!empty($item->logo)): ?>
                                                     <img src="../../../storages/logo/<?= htmlspecialchars($item->logo) ?>"
@@ -99,8 +84,6 @@ $result = mysqli_query($connect, $qProfil) or die("Query error: " . mysqli_error
                                                     <span class="text-muted">Tidak ada logo</span>
                                                 <?php endif; ?>
                                             </td>
-                                            <td><?= htmlspecialchars($item->created_at) ?></td>
-                                            <td><?= htmlspecialchars($item->updated_at) ?></td>
 
                                             <td>
                                                 <a href="./detail.php?id=<?= $item->id ?>" class="btn btn-sm btn-info text-white">
@@ -121,6 +104,7 @@ $result = mysqli_query($connect, $qProfil) or die("Query error: " . mysqli_error
                                     endwhile;
                                     ?>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>

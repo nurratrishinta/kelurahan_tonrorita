@@ -10,7 +10,7 @@
         <link rel="apple-touch-icon" sizes="90x90" href="../../templates-admin/material-dashboard-2/assets/img/logokelurah-removebg-preview.png">
         <link rel="icon" type="image/png" href="../../templates-admin/material-dashboard-2/assets/img/logokelurah-removebg-preview.png">
         <title>
-            KELURAHAN TONRORITA
+         Website Kelurahan Tonrorita
         </title>
         <!--     Fonts and icons     -->
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />

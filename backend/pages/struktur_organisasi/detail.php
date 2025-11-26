@@ -33,11 +33,7 @@ $data = mysqli_fetch_object(mysqli_stmt_get_result($stmt));
                 <input type="text" class="form-control" value="<?= htmlspecialchars($data->jabatan) ?>" disabled>
             </div>
 
-            <div class="mb-3">
-                <label>Atasan</label>
-                <input type="text" class="form-control" value="<?= htmlspecialchars($data->atasan ?? '-') ?>" disabled>
-            </div>
-
+            
             <div class="mb-3">
                 <label>Foto</label><br>
                 <?php if ($data->foto && file_exists("../../../storages/struktur_organisasi/$data->foto")): ?>

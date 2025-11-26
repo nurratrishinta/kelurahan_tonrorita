@@ -14,7 +14,7 @@ $result = mysqli_query($connect, $qKontak) or die("Query error: " . mysqli_error
 
         <div class="card shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5>📞 Data Kontak Masuk</h5>
+                <h5> Data Kontak Masuk</h5>
                 <a href="./create.php" class="btn btn-primary">
                     <i class="bi bi-plus-circle"></i> Tambah Kontak
                 </a>

@@ -46,22 +46,42 @@ $result = mysqli_query($connect, $qBerita) or die("Query error: " . mysqli_error
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no = 1;
+                                <?php
+                                $no = 1;
+
+                                // Fungsi pemotong judul 10 kata
+                                function potongJudul($text, $limit = 10)
+                                {
+                                    $kata = explode(' ', trim($text));
+                                    if (count($kata) <= $limit) {
+                                        return $text;
+                                    }
+                                    return implode(' ', array_slice($kata, 0, $limit)) . '...';
+                                }
+
                                 while ($item = $result->fetch_object()): ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= htmlspecialchars($item->judul) ?></td>
+
+                                        <!-- JUDUL MAKSIMAL 10 KATA -->
+                                        <td style="max-width:300px; white-space:normal;">
+                                            <?= htmlspecialchars(potongJudul($item->judul)) ?>
+                                        </td>
+
                                         <td>
                                             <?php if (!empty($item->gambar)): ?>
-                                                <img src="../../../storages/berita/<?= htmlspecialchars($item->gambar) ?>" width="70" class="rounded shadow-sm">
+                                                <img src="../../../storages/berita/<?= htmlspecialchars($item->gambar) ?>"
+                                                    width="70" class="rounded shadow-sm">
                                             <?php else: ?>
                                                 <span class="text-muted">Tidak ada</span>
                                             <?php endif; ?>
                                         </td>
+
                                         <td><?= htmlspecialchars($item->penulis) ?></td>
                                         <td><?= htmlspecialchars($item->kategori) ?></td>
                                         <td><?= htmlspecialchars($item->tanggal) ?></td>
                                         <td><?= htmlspecialchars($item->created_at) ?></td>
+
                                         <td>
                                             <a href="./detail.php?id=<?= $item->id ?>" class="btn btn-info btn-sm text-white">
                                                 <i class="bi bi-eye"></i> Detail
